@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotion Detection App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Emotion Detection App</h1>
+    <p>Upload a face image to detect the emotion</p>
+
+    <div class="upload-box">
+      <input type="file" id="imageUpload" accept="image/*" />
+      <label for="imageUpload" class="upload-label">Choose Image</label>
+    </div>
+
+    <div class="image-preview" id="imagePreview">
+      <img src="" alt="Image Preview" id="previewImg" />
+      <span id="noImageText">No image selected</span>
+    </div>
+
+    <button id="detectBtn">Detect Emotion</button>
+
+    <div class="result-box" id="resultBox">
+      <h2>Detected Emotion:</h2>
+      <p id="emotionText">—</p>
+    </div>
+  </div>
+
+  <script>
+    const imageUpload = document.getElementById("imageUpload");
+    const previewImg = document.getElementById("previewImg");
+    const noImageText = document.getElementById("noImageText");
+
+    imageUpload.addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function() {
+          previewImg.setAttribute("src", this.result);
+          previewImg.style.display = "block";
+          noImageText.style.display = "none";
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    document.getElementById("detectBtn").addEventListener("click", () => {
+      const resultBox = document.getElementById("resultBox");
+      const emotionText = document.getElementById("emotionText");
+      // Placeholder (to replace with model output later)
+      emotionText.textContent = "😊 Happy";
+      resultBox.style.display = "block";
+    });
+  </script>
+</body>
+</html>
